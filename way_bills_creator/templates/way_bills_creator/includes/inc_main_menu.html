@@ -1,0 +1,27 @@
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'way_bills_creator:waybill_list'%}">Путевые листы</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'way_bills_creator:car_list'%}">Авто</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'way_bills_creator:driver_list'%}">Водители</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'way_bills_creator:location_list'%}">Места назначения</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'way_bills_creator:distance_list'%}">Расстояния</a>
+    </li>
+</ul>
+
+<form class="d-flex" action="{% url 'users:logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit"> {{ user }} - Выход</button>
+</form>
+
+
+
+
+

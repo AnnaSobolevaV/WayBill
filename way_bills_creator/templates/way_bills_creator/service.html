@@ -1,0 +1,144 @@
+{% extends 'way_bills_creator/base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="card px-4 py-5 my-5 text-center">
+    <h2 class="display-8 fw-bold text-body-emphasis">Сервис Путевых листов</h2>
+</div>
+<div class="col-lg-12 p-4 mx-auto">
+    <div class="row">
+        <div class="col-4 p-2">
+            <div class="card mb-12 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <p> Загрузить события </p>
+                    </h4>
+                </div>
+                <div class="card-body">
+
+                    <form method="POST" action="{%url 'way_bills_creator:download_events'%}"
+                          class="form-floating" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <select class="form-select" name="selected_period">
+                                <option selected>Выберите период</option>
+                                {% for period in period_list %}
+                                <option value={{period}}>{{period}}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="form-select" name="selected_year">
+                                <option selected>Выберите год</option>
+                                {% for year in year_list %}
+                                <option value={{year}}>{{year}}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary mb-2">
+                                Загрузить события
+                            </button>
+                        </div>
+                    </form>
+
+                    <form method="POST" action="{%url 'way_bills_creator:upload_file_csv' 'events'%}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-2">
+                            <input class="form-control" type="file" id="file_events_csv" name=file_events_csv
+                                   accept=".csv">
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                                Загрузить из csv
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-2">
+            <div class="card mb-12 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <p> Сгенерировать путевые листы </p>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{%url 'way_bills_creator:create_waybills'%}"
+                          class="form-floating" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <select class="form-select" name="selected_period_wb">
+                                <option selected>Выберите период</option>
+                                {% for period in period_list %}
+                                <option value={{period}}>{{period}}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="form-select" name="selected_year_wb">
+                                <option selected>Выберите год</option>
+                                {% for year in year_list %}
+                                <option value={{year}}>{{year}}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                                Сгенерировать путевые листы
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 p-2">
+            <div class="card mb-12 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <p> Выгрузить отчет в Excel </p>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{%url 'way_bills_creator:download_report'%}"
+                          class="form-floating" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <select class="form-select" name="selected_period_excel">
+                                <option selected>Выберите период</option>
+                                {% for period in period_list %}
+                                <option value={{period}}>{{period}}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="form-select" name="selected_year_excel">
+                                <option selected>Выберите год</option>
+                                {% for year in year_list %}
+                                <option value={{year}}>{{year}}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                                Выгрузить отчет в Excel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-12 p-2 mx-auto">
+        <div class="row">
+            <div class="col-12 p-2">
+                <div class="card mb-12 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">
+                            <p> Логи </p>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        {% for log_str in log_str_list %}
+                        <p>{{ log_str }} </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endblock %}

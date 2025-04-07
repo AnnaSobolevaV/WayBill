@@ -1,0 +1,91 @@
+from django.urls import path
+from way_bills_creator.apps import WayBillsCreatorConfig
+from way_bills_creator.views import (
+    CarListView,
+    CarDetailView,
+    CarCreateView,
+    CarUpdateView,
+    CarDeleteView,
+    DriverListView,
+    DriverDetailView,
+    DriverCreateView,
+    DriverUpdateView,
+    DriverDeleteView,
+    LocationListView,
+    LocationDetailView,
+    LocationCreateView,
+    LocationUpdateView,
+    LocationDeleteView,
+    DistanceListView,
+    DistanceDetailView,
+    DistanceCreateView,
+    DistanceUpdateView,
+    DistanceDeleteView,
+    WayBillListView,
+    WayBillDetailView,
+    WayBillCreateView,
+    WayBillUpdateView,
+    WayBillDeleteView,
+    ServiceView,
+    create_waybills,
+    download_events,
+    upload_file_csv,
+    download_report,
+    download_wbs_excel,
+)
+
+app_name = WayBillsCreatorConfig.name
+
+urlpatterns = [
+    path("", ServiceView.as_view(), name="home"),
+    path("download_events/", download_events, name="download_events"),
+    path("download_report/", download_report, name="download_report"),
+    path("upload_file_csv/<str:what>", upload_file_csv, name="upload_file_csv"),
+    path("create_waybills/", create_waybills, name="create_waybills"),
+    path("download_wbs_excel/", download_wbs_excel, name="download_wbs_excel"),
+    path("drivers/", DriverListView.as_view(), name="driver_list"),
+    path("drivers/<int:pk>", DriverDetailView.as_view(), name="driver_detail"),
+    path("drivers/create", DriverCreateView.as_view(), name="driver_create"),
+    path("drivers/<int:pk>/update/", DriverUpdateView.as_view(), name="driver_update"),
+    path("drivers/<int:pk>/delete/", DriverDeleteView.as_view(), name="driver_delete"),
+    path("cars/", CarListView.as_view(), name="car_list"),
+    path("cars/<int:pk>", CarDetailView.as_view(), name="car_detail"),
+    path("cars/create", CarCreateView.as_view(), name="car_create"),
+    path("cars/<int:pk>/update/", CarUpdateView.as_view(), name="car_update"),
+    path("cars/<int:pk>/delete/", CarDeleteView.as_view(), name="car_delete"),
+    path("locations/", LocationListView.as_view(), name="location_list"),
+    path("locations/<int:pk>", LocationDetailView.as_view(), name="location_detail"),
+    path("locations/create", LocationCreateView.as_view(), name="location_create"),
+    path(
+        "locations/<int:pk>/update/",
+        LocationUpdateView.as_view(),
+        name="location_update",
+    ),
+    path(
+        "locations/<int:pk>/delete/",
+        LocationDeleteView.as_view(),
+        name="location_delete",
+    ),
+    path("distances/", DistanceListView.as_view(), name="distance_list"),
+    path("distances/<int:pk>", DistanceDetailView.as_view(), name="distance_detail"),
+    path("distances/create", DistanceCreateView.as_view(), name="distance_create"),
+    path(
+        "distances/<int:pk>/update/",
+        DistanceUpdateView.as_view(),
+        name="distance_update",
+    ),
+    path(
+        "distances/<int:pk>/delete/",
+        DistanceDeleteView.as_view(),
+        name="distance_delete",
+    ),
+    path("waybills/", WayBillListView.as_view(), name="waybill_list"),
+    path("waybills/<int:pk>", WayBillDetailView.as_view(), name="waybill_detail"),
+    path("waybills/create", WayBillCreateView.as_view(), name="waybill_create"),
+    path(
+        "waybills/<int:pk>/update/", WayBillUpdateView.as_view(), name="waybill_update"
+    ),
+    path(
+        "waybills/<int:pk>/delete/", WayBillDeleteView.as_view(), name="waybill_delete"
+    ),
+]

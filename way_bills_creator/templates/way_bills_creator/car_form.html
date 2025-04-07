@@ -1,0 +1,44 @@
+{% extends 'way_bills_creator/base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="card px-4 py-5 my-5 text-center">
+    <h2 class="display-5 fw-bold text-body-emphasis">Автомобиль</h2>
+</div>
+<div class="col-lg-9 mx-auto">
+    <form method="POST" action="" class="form-floating" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card mb-6 box-shadow">
+                    <div class="card-header">
+                        {% if object %}
+                        <h4 class="my-0 font-weight-normal">
+                            Редактирование автомобиля
+                        </h4>
+                        {% else %}
+                        <h4 class="my-0 font-weight-normal">
+                            Создание нового автомобиля
+                        </h4>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                        <a class="p-2 btn btn-lg btn-block btn-outline-primary"
+                           href="{% url 'way_bills_creator:car_list' %}">Отменить</a>
+                        {% if object %}
+                        <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                            Сохранить
+                        </button>
+                        {% else %}
+                        <button type="submit" class="btn btn-lg btn-block btn-outline-primary">
+                            Создать
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
