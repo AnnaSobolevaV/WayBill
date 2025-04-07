@@ -31,8 +31,13 @@
 3. так же можно запустить команду:
    docker-compose logs
    и убедиться что в логе нет ошибок.
-4. для создания суперюзера запустите команду: (не забудьте прописать емейл и пароль в .env)
-    docker-compose exec app python manage.py csu
+4. для создания суперюзера запустите команду: docker-compose exec app python manage.py csu
+(не забудьте прописать емейл и пароль в .env 
+SU_PASS=
+SU_EMAIL=)
+    
 
-
+Проект развернут на внешнем сервере с IP 84.252.132.136
+http://84.252.132.136:8000/  создан тестовый пользователь test@test.pro (test_pass)
+Тестовый Календарь https://teamup.com/kskxwe9udog87ghxj7
 
