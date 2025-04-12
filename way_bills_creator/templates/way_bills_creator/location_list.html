@@ -1,0 +1,53 @@
+{% extends 'way_bills_creator/base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="card px-4 py-5 my-5 text-center">
+    <h2 class="display-5 fw-bold text-body-emphasis">Места</h2>
+</div>
+<div class="col-lg-9 mx-auto">
+    <div class="row">
+        <div class="col-6 p-2">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">
+                        <a class="text-muted" href="create">Новый </a>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <a class="btn btn-primary mb-4 p-2" href="create" role="button">Создать</a>
+                    </div>
+                    <form method="POST" action="{%url 'way_bills_creator:upload_file_csv' 'locations'%}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input class="form-control" type="file" id="file_locations_csv" name=file_locations_csv
+                                   accept=".csv">
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-lg mb-2 p-2 btn-block btn-outline-primary">
+                                Загрузить из csv
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% for object in object_list %}
+        <div class="col-12 p-2">
+            <div class="card mb-12 box-shadow">
+                <div class="card-header">
+                    <h2>{{ object.location_name }}</h2>
+                </div>
+                <div class="card-body">
+                    <p>Название компании: {{object.company_name}} / Адрес: {{object.address}}
+                        <a class="btn btn-secondary" href="{{ object.pk }}" role="button">Детали &raquo;</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

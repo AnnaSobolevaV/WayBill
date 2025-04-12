@@ -1,0 +1,36 @@
+{% extends 'way_bills_creator/base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="card px-4 py-5 my-5 text-center">
+    <h2 class="display-5 fw-bold text-body-emphasis">Водитель</h2>
+</div>
+<div class="col-lg-9 mx-auto">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="card mb-6 box-shadow">
+                <div class="card-header">
+                    <h4 class="text-primary">
+                        {{object.name }}
+                    </h4>
+
+                    <a class="btn btn-primary" href="{% url 'way_bills_creator:driver_update' object.pk %}"
+                       role="button">
+                        Редактировать </a>
+                    <a class="btn btn-primary" href="{% url 'way_bills_creator:driver_delete' object.pk %}"
+                       role="button">
+                        Удалить </a>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>Автомобиль: {{object.car}}</li>
+                        <li>СНИЛС: {{object.snils_num}}</li>
+                        <li>Номер водительского удостоверения {{object.lic_num}}</li>
+                        <li>Дата выдачи водительского удостоверения {{object.lic_date}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

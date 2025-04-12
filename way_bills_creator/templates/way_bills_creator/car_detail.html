@@ -1,0 +1,42 @@
+{% extends 'way_bills_creator/base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="card px-4 py-5 my-5 text-center">
+    <h2 class="display-5 fw-bold text-body-emphasis">Автомобиль</h2>
+</div>
+<div class="col-lg-9 mx-auto">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="card mb-6 box-shadow">
+                <div class="card-header">
+                    <h4 class="text-primary">
+                        {{object.car_name }}
+                    </h4>
+
+                    <a class="btn btn-primary" href="{% url 'way_bills_creator:car_update' object.pk %}"
+                       role="button">
+                        Редактировать </a>
+                    <a class="btn btn-primary" href="{% url 'way_bills_creator:car_delete' object.pk %}"
+                       role="button">
+                        Удалить </a>
+
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>Номер {{ object.car_num }}</li>
+                        {% if object.oil_type == 'D' %}
+                        <li>Тип топлива: дизельное</li>
+                        {% endif %}
+                        {% if object.oil_type == 'G' %}
+                        <li>Тип топлива: автобензин</li>
+                        {% endif %}
+                        <li>Норма расхода топлива летом {{ object.l100km }}</li>
+                        <li>Норма расхода топлива зимой {{ object.l100km_w }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
